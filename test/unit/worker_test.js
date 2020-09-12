@@ -8,11 +8,11 @@ describe('Workers', () => {
     global.codecept_dir = path.join(__dirname, '/../data/sandbox');
   });
 
-  it('should run simple worker', (done) => {
+  it.only('should run simple worker', (done) => {
     if (!semver.satisfies(process.version, '>=11.7.0')) this.skip('not for node version');
     const workerConfig = {
       by: 'test',
-      testConfig: './test/data/sandbox/codecept.workers.conf.js',
+      testConfig: './test/data/sandbox/',
     };
     let passedCount = 0;
     let failedCount = 0;

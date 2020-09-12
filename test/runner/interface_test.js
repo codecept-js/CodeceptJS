@@ -1,10 +1,7 @@
 const expect = require('expect');
-const path = require('path');
 const exec = require('child_process').exec;
+const { codecept_run, codecept_dir } = require('./consts');
 
-const runner = path.join(__dirname, '/../../bin/codecept.js');
-const codecept_dir = path.join(__dirname, '/../data/sandbox');
-const codecept_run = `${runner} run`;
 const config_run_config = config => `${codecept_run} --config ${codecept_dir}/${config}`;
 
 describe('CodeceptJS Interface', () => {

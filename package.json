@@ -116,7 +116,7 @@
     "mocha-parallel-tests": "^2.3.0",
     "nightmare": "^3.0.2",
     "nodemon": "^1.19.4",
-    "playwright": "^1.1.1",
+    "playwright": "^1.2.1",
     "protractor": "^5.4.4",
     "puppeteer": "^4.0.0",
     "qrcode-terminal": "^0.12.0",

@@ -30,10 +30,10 @@ describe('CodeceptJS Allure Plugin', function () {
     deleteDir(path.join(codecept_dir, 'output/pageobject'));
   });
 
-  it('should correct save info about page object for xml file', (done) => {
-    exec(codecept_run_config('codecept.po.json'), (err) => {
+  it.only('should correct save info about page object for xml file', (done) => {
+    exec(codecept_run_config('codecept.po.json'), (err, stdout) => {
       const files = fs.readdirSync(path.join(codecept_dir, 'output/pageobject'));
-
+      console.log(stdout);
       fs.readFile(path.join(codecept_dir, 'output/pageobject', files[0]), (err, data) => {
         parser.parseString(data, (err, result) => {
           const testCase = result['ns2:test-suite']['test-cases'][0]['test-case'][0];

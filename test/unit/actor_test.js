@@ -48,7 +48,7 @@ describe('Actor', () => {
     expect(I).toHaveProperty('customStep');
   });
 
-  it('should correct run step from Helper inside PageObject', () => {
+  it.only('should correct run step from Helper inside PageObject', () => {
     actor({
       customStep() {
         return this.hello();
