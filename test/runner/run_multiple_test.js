@@ -183,6 +183,17 @@ describe('CodeceptJS Multiple Runner', function () {
     });
   });
 
+  it('should exit code 1 when error in config', (done) => {
+    process.chdir(codecept_dir);
+    exec(`${runner} run-multiple --config configs/codecept-invalid.config.js default --all`, (err, stdout, stderr) => {
+      expect(stdout).not.toContain('UnhandledPromiseRejectionWarning');
+      expect(stderr).not.toContain('UnhandledPromiseRejectionWarning');
+      expect(stdout).toContain('badFn is not defined');
+      expect(err).not.toBe(null);
+      done();
+    });
+  });
+
   describe('bootstrapAll and teardownAll', () => {
     const _codecept_run = `run-multiple --config ${codecept_dir}`;
     it('should be executed from async function in config', (done) => {

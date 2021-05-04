@@ -16,14 +16,13 @@ exports.config = {
       browsers: ['chrome', { browser: 'firefox' }],
     },
   },
-  bootstrapAll: async (done) => {
-    Promise.resolve('inside Promise').then(res => console.log(`Results: ${res}`)).then(() => done());
+  bootstrapAll: async () => {
+    await Promise.resolve('inside Promise').then(res => console.log(`Results: ${res}`));
     event.dispatcher.on(event.multiple.before, () => {
       console.log('"event.multiple.before" is called');
     });
   },
-  teardownAll: async (done) => {
+  teardownAll: async () => {
     console.log('"teardownAll" is called.');
-    done();
   },
 };

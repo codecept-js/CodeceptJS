@@ -253,6 +253,16 @@ describe('CodeceptJS Runner', () => {
     });
   });
 
+  it('should exit code 1 when error in config', (done) => {
+    exec(`${codecept_run_config('configs/codecept-invalid.config.js')} --profile failed`, (err, stdout, stderr) => {
+      stdout.should.not.include('UnhandledPromiseRejectionWarning');
+      stderr.should.not.include('UnhandledPromiseRejectionWarning');
+      stdout.should.include('badFn is not defined');
+      assert(err.code);
+      done();
+    });
+  });
+
   describe('with require parameter', () => {
     const moduleOutput = 'Module was required 1';
     const moduleOutput2 = 'Module was required 2';

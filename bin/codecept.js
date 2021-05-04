@@ -2,6 +2,16 @@
 const program = require('commander');
 const Codecept = require('../lib/codecept');
 const { print, error } = require('../lib/output');
+const { printError } = require('../lib/command/utils');
+
+const errorHandler = (fn) => async (...args) => {
+  try {
+    await fn(...args);
+  } catch (e) {
+    printError(e);
+    process.exitCode = 1;
+  }
+};
 
 if (process.versions.node && process.versions.node.split('.') && process.versions.node.split('.')[0] < 8) {
   error('NodeJS >= 8 is required to run.');
@@ -16,41 +26,41 @@ program.version(Codecept.version());
 
 program.command('init [path]')
   .description('Creates dummy config in current dir or [path]')
-  .action(require('../lib/command/init'));
+  .action(errorHandler(require('../lib/command/init')));
 
 program.command('migrate [path]')
   .description('Migrate json config to js config in current dir or [path]')
-  .action(require('../lib/command/configMigrate'));
+  .action(errorHandler(require('../lib/command/configMigrate')));
 
 program.command('shell [path]')
   .alias('sh')
   .description('Interactive shell')
   .option('--verbose', 'output internal logging information')
   .option('--profile [value]', 'configuration profile to be used')
-  .action(require('../lib/command/interactive'));
+  .action(errorHandler(require('../lib/command/interactive')));
 
 program.command('list [path]')
   .alias('l')
   .description('List all actions for I.')
-  .action(require('../lib/command/list'));
+  .action(errorHandler(require('../lib/command/list')));
 
 program.command('def [path]')
   .description('Generates TypeScript definitions for all I actions.')
   .option('-c, --config [file]', 'configuration file to be used')
   .option('-o, --output [folder]', 'target folder to paste definitions')
-  .action(require('../lib/command/definitions'));
+  .action(errorHandler(require('../lib/command/definitions')));
 
 program.command('gherkin:init [path]')
   .alias('bdd:init')
   .description('Prepare CodeceptJS to run feature files.')
   .option('-c, --config [file]', 'configuration file to be used')
-  .action(require('../lib/command/gherkin/init'));
+  .action(errorHandler(require('../lib/command/gherkin/init')));
 
 program.command('gherkin:steps [path]')
   .alias('bdd:steps')
   .description('Prints all defined gherkin steps.')
   .option('-c, --config [file]', 'configuration file to be used')
-  .action(require('../lib/command/gherkin/steps'));
+  .action(errorHandler(require('../lib/command/gherkin/steps')));
 
 program.command('gherkin:snippets [path]')
   .alias('bdd:snippets')
@@ -59,28 +69,28 @@ program.command('gherkin:snippets [path]')
   .option('-c, --config [file]', 'configuration file to be used')
   .option('--feature [file]', 'feature files(s) to scan')
   .option('--path [file]', 'file in which to place the new snippets')
-  .action(require('../lib/command/gherkin/snippets'));
+  .action(errorHandler(require('../lib/command/gherkin/snippets')));
 
 program.command('generate:test [path]')
   .alias('gt')
   .description('Generates an empty test')
-  .action(require('../lib/command/generate').test);
+  .action(errorHandler(require('../lib/command/generate').test));
 
 program.command('generate:pageobject [path]')
   .alias('gpo')
   .description('Generates an empty page object')
-  .action(require('../lib/command/generate').pageObject);
+  .action(errorHandler(require('../lib/command/generate').pageObject));
 
 program.command('generate:object [path]')
   .alias('go')
   .option('--type, -t [kind]', 'type of object to be created')
   .description('Generates an empty support object (page/step/fragment)')
-  .action(require('../lib/command/generate').pageObject);
+  .action(errorHandler(require('../lib/command/generate').pageObject));
 
 program.command('generate:helper [path]')
   .alias('gh')
   .description('Generates a new helper')
-  .action(require('../lib/command/generate').helper);
+  .action(errorHandler(require('../lib/command/generate').helper));
 
 program.command('run [test]')
   .description('Executes tests')
@@ -116,8 +126,8 @@ program.command('run [test]')
   .option('--recursive', 'include sub directories')
   .option('--trace', 'trace function calls')
   .option('--child <string>', 'option for child processes')
+  .action(errorHandler(require('../lib/command/run')));
 
-  .action(require('../lib/command/run'));
 program.command('run-workers <workers>')
   .description('Executes tests in workers')
   .option('-c, --config [file]', 'configuration file to be used')
@@ -133,7 +143,7 @@ program.command('run-workers <workers>')
   .option('-p, --plugins <k=v,k2=v2,...>', 'enable plugins, comma-separated')
   .option('-O, --reporter-options <k=v,k2=v2,...>', 'reporter-specific options')
   .option('-R, --reporter <name>', 'specify the reporter to use')
-  .action(require('../lib/command/run-workers'));
+  .action(errorHandler(require('../lib/command/run-workers')));
 
 program.command('run-multiple [suites...]')
   .description('Executes tests multiple')
@@ -157,12 +167,12 @@ program.command('run-multiple [suites...]')
   // mocha options
   .option('--colors', 'force enabling of colors')
 
-  .action(require('../lib/command/run-multiple'));
+  .action(errorHandler(require('../lib/command/run-multiple')));
 
 program.command('info [path]')
   .description('Print debugging information concerning the local environment')
   .option('-c, --config', 'your config file path')
-  .action(require('../lib/command/info'));
+  .action(errorHandler(require('../lib/command/info')));
 
 program.command('dry-run [test]')
   .description('Prints step-by-step scenario for a test without actually running it')
@@ -178,7 +188,7 @@ program.command('dry-run [test]')
   .option('--steps', 'show step-by-step execution')
   .option('--verbose', 'output internal logging information')
   .option('--debug', 'output additional information')
-  .action(require('../lib/command/dryRun'));
+  .action(errorHandler(require('../lib/command/dryRun')));
 
 program.on('command:*', (cmd) => {
   console.log(`\nUnknown command ${cmd}\n`);

@@ -191,4 +191,16 @@ describe('CodeceptJS Workers Runner', function () {
       done();
     });
   });
+
+  it('should exit code 1 when error in config', function (done) {
+    if (!semver.satisfies(process.version, '>=11.7.0')) this.skip('not for node version');
+    exec(`${codecept_run_glob('configs/codecept-invalid.config.js')} 2`, (err, stdout, stderr) => {
+      expect(stdout).not.toContain('UnhandledPromiseRejectionWarning');
+      expect(stderr).not.toContain('UnhandledPromiseRejectionWarning');
+      expect(stdout).toContain('badFn is not defined');
+      expect(err).not.toBe(null);
+
+      done();
+    });
+  });
 });
