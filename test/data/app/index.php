@@ -40,6 +40,7 @@ $urls = array(
     '/spinner' => 'spinner',
     '/iframe' => 'iframe',
     '/iframe_nested' => 'iframe_nested',
+    '/shadow_dom' => 'shadow_dom',
     '/dynamic' => 'dynamic',
     '/timeout' => 'timeout',
     '/download' => 'download',

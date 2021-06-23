@@ -184,6 +184,13 @@ class iframe_nested {
     }
 }
 
+class shadow_dom {
+    public function GET()
+    {
+        include __DIR__.'/view/shadow_dom.php';
+    }
+}
+
 class facebookController {
     function GET($matches) {
         include __DIR__.'/view/facebook.php';

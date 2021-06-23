@@ -279,6 +279,16 @@ describe('Playwright', function () {
       .then(() => I.seeNumberOfElements('#area1', 1)));
   });
 
+  describe('#seeElement shadow element', () => {
+    it('should return ok', () => I.amOnPage('/shadow_dom')
+      .then(() => I.seeElement({ shadow: ['my-app', 'span'] })));
+  });
+
+  describe('#see text in shadow element', () => {
+    it('should return ok', () => I.amOnPage('/shadow_dom')
+      .then(() => I.see("Let's have different text!", { shadow: ['my-app', 'span'] })));
+  });
+
   describe('#switchTo', () => {
     it('should switch reference to iframe content', () => I.amOnPage('/iframe')
       .then(() => I.switchTo('[name="content"]'))
