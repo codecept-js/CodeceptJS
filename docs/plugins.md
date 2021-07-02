@@ -607,6 +607,8 @@ Run tests with plugin enabled:
 -   `ignoredSteps` - an array for custom steps to ignore on retry. Use it to append custom steps to ignored list.
     You can use step names or step prefixes ending with `*`. As such, `wait*` will match all steps starting with `wait`.
     To append your own steps to ignore list - copy and paste a default steps list. Regexp values are accepted as well.
+-   `removeDefaultIgnoreSteps` - an array to remove the step in the defaultIgnoredSteps list.
+    You can use step names or step prefixes ending with `*`. As such, `wait*` will match all steps starting with `wait`.
 
 #### Example
 
@@ -617,6 +619,9 @@ plugins: {
         ignoreSteps: [
           'scroll*', // ignore all scroll steps
           /Cookie/, // ignore all steps with a Cookie in it (by regexp)
+        ],
+        removeDefaultIgnoreSteps: [
+        'send*', // remove the send* steps in the defaultIgnoredSteps list
         ]
     }
 }
