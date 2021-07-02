@@ -6,5 +6,8 @@
     <input type="text" id="email" name="email" style="display:none;"/>
     <input type="submit" value="Submit" />
 </form>
+<form style="width: 100px; height: 40px; visibility:hidden; background: red" action="/form/simple" method="POST">
+    <input type="text" id="noid" name="noname" value="RANDOM_VALUE" />
+</form>
 </body>
 </html>

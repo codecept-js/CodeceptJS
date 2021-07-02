@@ -57,5 +57,7 @@
    <span class="span" style="height:12px">Fisrt <span>
    <span class="span">Second <span>
 </div>
+<div class="issue2928" style="width: 100px; height: 40px; visibility:hidden; background: red">visibility:hidden</div>
+<div class="issue2928" style="width: 100px; height: 40px; background: green">no visibility hidden</div>
 </body>
 </html>
