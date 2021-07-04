@@ -55,7 +55,7 @@ For React apps a special `react` locator is available. It allows to select an el
 { react: 'Input', state: 'valid'}
 ```
 
-In WebDriver and Puppeteer you can use React locators in any method where locator is required:
+In WebDriver, Puppeteer, and Playwright you can use React locators in any method where locator is required:
 
 ```js
 I.click({ react: 'Tab', props: { title: 'Click Me!' }});

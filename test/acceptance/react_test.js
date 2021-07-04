@@ -1,6 +1,6 @@
 Feature('React Selectors');
 
-Scenario('props @WebDriver @Puppeteer', ({ I }) => {
+Scenario('props @WebDriver @Puppeteer @Playwright', ({ I }) => {
   I.amOnPage('https://ahfarmer.github.io/calculator/');
   I.click('7');
   I.seeElement({ react: 't', props: { name: '5' } });
@@ -11,7 +11,7 @@ Scenario('props @WebDriver @Puppeteer', ({ I }) => {
   I.seeElement({ react: 't', props: { value: '81' } });
 });
 
-Scenario('component name @Puppeteer', ({ I }) => {
+Scenario('component name @Puppeteer @Playwright', ({ I }) => {
   I.amOnPage('http://negomi.github.io/react-burger-menu/');
   I.click({ react: 'BurgerIcon' });
   I.waitForVisible('#slide', 10);

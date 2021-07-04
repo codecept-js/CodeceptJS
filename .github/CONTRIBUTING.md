@@ -29,7 +29,7 @@ Depending on a type of a change you should do the following.
 
 ## Helpers
 
-Please keep in mind that CodeceptJS have **unified API** for WebDriverIO, Appium, Protractor, Nightmare, Puppeteer, TestCafe. Tests written using those helpers should be compatible at syntax level. However, some of helpers may contain unique methods. That happens. If, for instance, WebDriverIO has method XXX and Nightmare doesn't, you can implement XXX inside Nightmare using the same method signature.
+Please keep in mind that CodeceptJS have **unified API** for Playwright, WebDriverIO, Appium, Protractor, Nightmare, Puppeteer, TestCafe. Tests written using those helpers should be compatible at syntax level. However, some of helpers may contain unique methods. That happens. If, for instance, WebDriverIO has method XXX and Nightmare doesn't, you can implement XXX inside Nightmare using the same method signature.
 
 ### Updating a WebDriver | Nightmare
 
