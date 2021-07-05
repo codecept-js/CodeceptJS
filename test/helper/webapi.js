@@ -546,6 +546,12 @@ module.exports.tests = function () {
       await I.click('Submit');
       assert.equal(formContents('name'), 'OLD_VALUE_AND_NEW');
     });
+
+    it('should not fill invisible fields', async () => {
+      if (isHelper('Playwright')) return; // It won't be implemented
+      await I.amOnPage('/form/field');
+      await assert.rejects(I.fillField('email', 'test@1234'));
+    });
   });
 
   describe('#clearField', () => {
