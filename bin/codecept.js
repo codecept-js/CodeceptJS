@@ -96,7 +96,7 @@ program.command('run [test]')
   .option('--features', 'run only *.feature files and skip tests')
   .option('--tests', 'run only JS test files and skip features')
   .option('-p, --plugins <k=v,k2=v2,...>', 'enable plugins, comma-separated')
-
+  .option('--failed', 'to run failed/custom Tests')
   // mocha options
   .option('--colors', 'force enabling of colors')
   .option('--no-colors', 'force disabling of colors')
@@ -134,6 +134,7 @@ program.command('run-workers <workers>')
   .option('-p, --plugins <k=v,k2=v2,...>', 'enable plugins, comma-separated')
   .option('-O, --reporter-options <k=v,k2=v2,...>', 'reporter-specific options')
   .option('-R, --reporter <name>', 'specify the reporter to use')
+  .option('--failed', 'to run failed/custom Tests')
   .action(require('../lib/command/run-workers'));
 
 program.command('run-multiple [suites...]')

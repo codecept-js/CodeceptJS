@@ -954,6 +954,51 @@ In the same manner additional services from webdriverio can be installed, enable
 
 -   `config`  
 
+## reRunFailedTest
+It stores failed scripts from current execution in failedCases.json
+
+This plugin allows running
+- only the scripts which are failed in previous execution
+- run any custom scripts provided by user without any pattern (can be provided in failedCases.json)
+- autoRetry failed scripts from current execution to detect flakiness
+
+```js
+plugins: {
+  reRunFailedTest: {}
+  enabled: true,
+    autoRetry: true
+}
+```
+
+Run test with plugin enabled
+```js
+npx codeceptjs run --plugins reRunFailedTest
+```
+
+#### Configuration
+- autoRetry: to auto retry the failed scripts from current execution after all scripts are completed
+
+### Options
+
+
+| Param            | Description                                                                    |
+| ---------------- | ------------------------------------------------------------------------------ |
+| failed           | Only executes the failed/custom(selective) scripts present in failedCases.json              |
+
+```js
+npx codeceptjs run --failed
+```
+or
+```js
+npx codeceptjs run-workers ${workerCount} --failed
+```
+
+#### Note:
+The restart option must be set true in order to use this plugin
+```js
+restart: true
+```
+
 [1]: https://user-images.githubusercontent.com/220264/45676511-8e052800-bb3a-11e8-8cbb-db5f73de2add.png
 
 [2]: https://github.com/allure-framework/allure2/blob/master/plugins/screen-diff-plugin/README.md
